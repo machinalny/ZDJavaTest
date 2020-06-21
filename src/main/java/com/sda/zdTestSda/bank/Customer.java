@@ -3,6 +3,7 @@ package com.sda.zdTestSda.bank;
 public class Customer {
 
     private final Long customerId;
+    private final String pesel;
     private String firstName;
     private String lastName;
     private String address;
@@ -12,10 +13,11 @@ public class Customer {
     private int nextAccountNumber = 0;
     private int nextCardNumber = 0;
 
-    public Customer(String firstName, String lastName, String address) {
+    public Customer(String firstName, String lastName, String address, String pesel) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
+        this.pesel = pesel;
         this.customerId = System.currentTimeMillis();
     }
 
@@ -23,32 +25,24 @@ public class Customer {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public Long[] getAccountNumbers() {
         return accountNumbers;
     }
 
-    public void addAccountNumber(Long accountNumber) {
+    public boolean addAccountNumber(Long accountNumber) {
+        if(this.accountNumberAssigned(accountNumber)){
+            return false;
+        }
         this.accountNumbers[nextAccountNumber++] = accountNumber;
+        return true;
     }
 
     public void addCardNumber(Long cardNumber) {
@@ -59,8 +53,20 @@ public class Customer {
         return cardNumbers;
     }
 
-
     public Long getCustomerId() {
         return customerId;
+    }
+
+    public String getPesel() {
+        return pesel;
+    }
+
+    private boolean accountNumberAssigned(Long accountNumber) {
+        for (int i = 0; i < nextAccountNumber; i++) {
+            if (accountNumber.equals(accountNumbers[i])) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -18,4 +18,16 @@ public class FirstTest {
         String yourNameIs = "Molotov";
         assertEquals(myName, yourNameIs);
     }
+
+    @Test
+    public void sayWhatYourNameIs(){
+        Integer number = 1;
+        assertEquals(number, 2);
+    }
+
+    @Test
+    public void myTest(){
+        String[] stringArray = {"A", "B"};
+        assertArrayEquals(stringArray, new String[]{"B", "A"});
+    }
 }
