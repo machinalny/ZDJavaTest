@@ -29,20 +29,22 @@ public class BankSystem {
         terminals[nextTerminal++] = terminal;
     }
 
-    public void addAccount(Terminal terminal){
+    public Long addAccount(Terminal terminal){
         Account account = new Account(System.currentTimeMillis(), 0.0);
         this.accounts[nextAccountNumber++] = account;
         terminal.setAccountNumber(account.getNumber());
+        return terminal.getId();
     }
 
-    public void addAccount(Customer customer) {
-        this.addAccountWithDeposit(customer, 0.0);
+    public Long addAccount(Customer customer) {
+        return this.addAccountWithDeposit(customer, 0.0);
     }
 
-    public void addAccountWithDeposit(Customer customer, Double deposit) {
+    public Long addAccountWithDeposit(Customer customer, Double deposit) {
         Account account = new Account(System.currentTimeMillis(), deposit);
         this.accounts[nextAccountNumber++] = account;
         customer.addAccountNumber(account.getNumber());
+        return account.getNumber();
     }
 
     public Card addCard(Customer customer) {
@@ -82,7 +84,7 @@ public class BankSystem {
         return false;
     }
 
-    private Account getAccountByNumber(Long accountNumber) {
+    public Account getAccountByNumber(Long accountNumber) {
         for (int i = 0; i < nextAccountNumber; i++) {
             Account accountToCheck = this.accounts[i];
 
