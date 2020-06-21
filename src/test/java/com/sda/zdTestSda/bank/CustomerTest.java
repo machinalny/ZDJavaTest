@@ -2,6 +2,8 @@ package com.sda.zdTestSda.bank;
 
 import com.sda.zdTestSda.assertions.CustomerAssert;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 class CustomerTest {
 
