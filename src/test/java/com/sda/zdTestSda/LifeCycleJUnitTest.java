@@ -2,6 +2,7 @@ package com.sda.zdTestSda;
 
 import org.junit.jupiter.api.*;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LifeCycleJUnitTest {
@@ -21,6 +22,8 @@ public class LifeCycleJUnitTest {
     @Test
     public void testValid() {
         System.out.println("Test Prawidlowy");
+        String[] arrayToTest = {"A", "B", "C"};
+        assertArrayEquals(arrayToTest, new String[]{"A", "B", "C"});
         assertEquals(1, 1);
     }
 
