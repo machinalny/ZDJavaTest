@@ -45,8 +45,12 @@ public class Customer {
         return true;
     }
 
-    public void addCardNumber(Long cardNumber) {
-        this.cardNumbers[nextAccountNumber++] = cardNumber;
+    public boolean addCardNumber(Long cardNumber) {
+        if(this.cardNumberAssigned(cardNumber)){
+            return false;
+        }
+        this.cardNumbers[nextCardNumber++] = cardNumber;
+        return true;
     }
 
     public Long[] getCardNumbers() {
@@ -64,6 +68,15 @@ public class Customer {
     private boolean accountNumberAssigned(Long accountNumber) {
         for (int i = 0; i < nextAccountNumber; i++) {
             if (accountNumber.equals(accountNumbers[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean cardNumberAssigned(Long cardNumber) {
+        for (int i = 0; i < nextCardNumber; i++) {
+            if (cardNumber.equals(cardNumbers[i])) {
                 return true;
             }
         }

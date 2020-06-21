@@ -10,13 +10,13 @@ class CustomerTest {
 
     @BeforeEach
     public void setUp(){
-        customer = new Customer("Lukasz", "Lopusinskie", "Wroclaw", "XXX");
+        customer = new Customer("Lukasz", "Lopusinski", "Wroclaw", "XXX");
     }
 
     @Test
     public void test_createNewCustomerWithPesel(){
         String pesel = "7847144444";
-        Customer customer = new Customer("Lukasz", "Lopusinskie", "Wroclaw", pesel);
+        Customer customer = new Customer("Lukasz", "Lopusinski", "Wroclaw", pesel);
 
         String peselResult = customer.getPesel();
 
@@ -48,5 +48,45 @@ class CustomerTest {
 
         assertFalse(result);
     }
+
+    @Test
+    public void test_whenCardNumberAddedItIsPlacedInCustomer(){
+        Long cardNumber = 1000L;
+        boolean result = this.customer.addCardNumber(cardNumber);
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void test_whenCardNumberExistsAndItIsAddedAgainThenFalse(){
+        Long cardNumber = 1000L;
+        this.customer.addCardNumber(cardNumber);
+        boolean result = this.customer.addCardNumber(cardNumber);
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void test_whenWantToGetCardNumbersTheyAreThere(){
+        Long[] cardNumbers = new Long[20];
+        cardNumbers[0] = 100L;
+        cardNumbers[1] = 1000L;
+        this.customer.addCardNumber(100L);
+        this.customer.addCardNumber(1000L);
+
+        assertArrayEquals(cardNumbers, this.customer.getCardNumbers());
+    }
+
+    @Test
+    public void test_whenWantToGetAccountNumbersTheyAreThere(){
+        Long[] accountNumbers = new Long[10];
+        accountNumbers[0] = 100L;
+        accountNumbers[1] = 1000L;
+        this.customer.addAccountNumber(100L);
+        this.customer.addAccountNumber(1000L);
+
+        assertArrayEquals(accountNumbers, this.customer.getAccountNumbers());
+    }
+
 
 }
